@@ -517,21 +517,21 @@ describe('google auth adapter', () => {
   const httpsRequest = require('../lib/Adapters/Auth/httpsRequest');
 
   it('should use id_token for validation is passed', async () => {
-    spyOn(httpsRequest, 'request').and.callFake(() => {
+    spyOn(httpsRequest, 'get').and.callFake(() => {
       return Promise.resolve({ sub: 'userId' });
     });
     await google.validateAuthData({ id: 'userId', id_token: 'the_token' }, {});
   });
 
   it('should use id_token for validation is passed and responds with user_id', async () => {
-    spyOn(httpsRequest, 'request').and.callFake(() => {
+    spyOn(httpsRequest, 'get').and.callFake(() => {
       return Promise.resolve({ user_id: 'userId' });
     });
     await google.validateAuthData({ id: 'userId', id_token: 'the_token' }, {});
   });
 
   it('should use access_token for validation is passed and responds with user_id', async () => {
-    spyOn(httpsRequest, 'request').and.callFake(() => {
+    spyOn(httpsRequest, 'get').and.callFake(() => {
       return Promise.resolve({ user_id: 'userId' });
     });
     await google.validateAuthData(
@@ -541,14 +541,14 @@ describe('google auth adapter', () => {
   });
 
   it('should use access_token for validation is passed with sub', async () => {
-    spyOn(httpsRequest, 'request').and.callFake(() => {
+    spyOn(httpsRequest, 'get').and.callFake(() => {
       return Promise.resolve({ sub: 'userId' });
     });
     await google.validateAuthData({ id: 'userId', id_token: 'the_token' }, {});
   });
 
   it('should fail when the id_token is invalid', async () => {
-    spyOn(httpsRequest, 'request').and.callFake(() => {
+    spyOn(httpsRequest, 'get').and.callFake(() => {
       return Promise.resolve({ sub: 'badId' });
     });
     try {
@@ -563,7 +563,7 @@ describe('google auth adapter', () => {
   });
 
   it('should fail when the access_token is invalid', async () => {
-    spyOn(httpsRequest, 'request').and.callFake(() => {
+    spyOn(httpsRequest, 'get').and.callFake(() => {
       return Promise.resolve({ sub: 'badId' });
     });
     try {

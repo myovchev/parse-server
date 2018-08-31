@@ -51,7 +51,7 @@ function validateAppId() {
 
 // A promisey wrapper for api requests
 function googleRequest(path) {
-  return httpsRequest.request('https://www.googleapis.com/oauth2/v3/' + path);
+  return httpsRequest.get("https://www.googleapis.com/oauth2/v3/" + path);
 }
 
 module.exports = {
